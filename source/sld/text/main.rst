@@ -4,27 +4,41 @@ Style Layer Descriptor (SLD)
 Introduction
 ------------
 
-Geospatial data (vector and raster) have no intrinsic visual component. In order to see data, it must be styled. Styling specifies color, thickness, and other visible attributes used to render data on a map. A WMS provides a set of style options for each data set; however these are preconfigured by the server, and the user cannot create, inspect, modify a style. The Styled Layer Descriptor (SLD) is a standard that enables an application  t to configure in an XML document how to properly portray layers and legends in a WMS. It uses Symbology Ending (SE) to specify styling of features and coverages. The SLD Profile of WMS enhances a WMS with additional operations to support styling of features from WFS and coverages from WCS.
+Geospatial data (vector and raster) have no intrinsic visual component. In order to see data, it must be styled. Styling specifies color, thickness, and other visible attributes used to render data on a map. A WMS provides a set of style options for each data set; however these are preconfigured by the server, and the user cannot create, inspect, modify a style. The Styled Layer Descriptor (SLD) is a standard that enables an application  to configure in an XML document how to properly portray layers and legends in a WMS. It uses Symbology Ending (SE) to specify styling of features and coverages. The SLD Profile of WMS enhances a WMS with additional operations to support styling of features from WFS and coverages from WCS.
 
 
 History
+-------------
 
-.. csv-table:: Title
-   :header: "Version number", "Release date", "Summary of Changes"
-   :widths: 15, 10, 30
+.. list-table:: 
+   :widths: 15, 20, 65
+   :header-rows: 1  
 
-   1.1, 2007-06-29, 1.0 specification was split into SE and SLD, more functionality was added
-   1.0, 2002-09-19
+   * - **Version number**
+     - **Release date**
+     - **Summary of Changes**
 
+   * - 1.1
+     - 2007-06-29
+     - "1.0 specification was split into SE and SLD, more functionality was added"
+   * - 1.0
+     - 2002-09-19
+     -
 
 
 Versions 1.1 - `OGC 05-078r4 <http://portal.opengeospatial.org/files/?artifact_id=22364>`_ is the latest version.
+
+Test Suites and Implementations
+--------------------------------
+
+
 
 Test Suite 
 
    No test suite exists for SLD.
 
 Implementations
+
    Implementations can be found at the `OGC implementation database <http://www.opengeospatial.org/resource/products/byspec>`_
 
 
@@ -43,14 +57,14 @@ Relation to other OGC Standards
 - Symbology Encoding (SE): 
 
 Basic Example
--------------
+---------------
 
-A basic example of an SLD XML document describing how point data can be styled as blue circles with a diameter of 5 pixels is given below 
+SLD XML document describing how point data can be styled as blue circles with a diameter of 5 pixels.
 
 .. image:: ../img/sld-point.jpg
-      :width: 70%
+      :width: 50%
 
-Advance Examples
+More Examples
 ----------------
 
  The `GeoServer SLD Cookbook  <http://docs.geoserver.org/stable/en/user/styling/sld-cookbook/index.html>`_ provides examples of SLDs for points, lines, polygons and raster.

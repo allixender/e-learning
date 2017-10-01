@@ -1,6 +1,35 @@
 WMS - Operations
 ================
 
+Background
+--------------------
+
+History
+  WMS version 1.0.0 in April 2000, followed by version 1.1.0 in June 2001,and version 1.1.1 in January 2002. The OGC released WMS version 1.3.0 in January 2004.
+Versions
+  1.3 is the current latest version 
+Test Suite
+  Test suites are available for: 
+      - `WMS 1.1.1 <http://cite.opengeospatial.org/teamengine/>`_ 
+      - `WMS 1.3.0 <http://cite.opengeospatial.org/teamengine/>`_
+Implementations
+   Implementations can be found at the OGC database. `here <http://www.opengeospatial.org/resource/products/byspec>`_
+
+Usage
+^^^^^^
+Through a highly configurable interface the WMS standard makes map images (but not source data) available in standard image formats. Government agencies publish all kinds of official map cartography using this standard. Other large organizations use this standard to enable independent departments to interact more easily internally. Anybody using this standard can use it to overlay map images from many different sources regardless of the underlying software.
+
+WMS provides a standard interface for requesting a geospatial map image.  The benefit of this is that WMS clients can request images from multiple WMS servers, and then combine them into a single view for the user.  The standard guarantees that these images can all be overlaid on one another using a common geospatial coordinate reference system.  Numerous servers and clients support WMS.
+
+
+Relation to other OGC Standards
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- OGC Web Map Tile Service Interface Standard (WMTS): The WMTS standard is a better fit For highly scalable systems (many simultaneous requests) that only need static maps. It complements the WMS standard with cachable static map tiles. WMS servers can be used as data sources or rendering engines for WMTS services.
+- OGC Web Feature Service (WFS): The WFS standard is a better fit for extended query functionality of spatial data. It provides programmatic access to the geographic feature data. WMS and WFS often go together. An organization publishing both WMS and WFS often use the same data source.
+- OGC Styled Layer Descriptor Interface Standard (SLD): The SLD standard allows the user to modify the cartographic appearance of a map image. It is an optional feature of the OGC WMS standard.
+- OGC Symbology Encoding (SE): The SE standard describes how to define map symbology. It is used to modify the cartographic appearance of map images. It is an optional feature of the OGC WMS and SLD standards.
+
 This section provides detailed information about the types of WMS requests a client is able to perform to a WMS server.
 
 .. list-table:: WMS Operations
@@ -20,36 +49,12 @@ This section provides detailed information about the types of WMS requests a cli
    * - ``GetLegendGraphic`` (optional)
      - Retrieves a legend for a map. 
 
-Exceptions
-----------
 
-When a request from a client to a WMS Server is not performed properly, a Server needs to report an exception. 
-Formats in which a WMS Server can report exceptions are shown in the table bellow.
-
-.. list-table:: Exceptions
-   :widths: 15 50 35
-   :header-rows: 1
-   
-   * - **Format**
-     - **Syntax**
-     - **Notes**
-   * - XML
-     - ``application/vnd.ogc.se_xml``
-     - The error is described in XML.
-   * - PNG
-     - ``application/vnd.ogc.se_inimage``
-     - The error is return as an image.
-   * - Blank
-     - ``application/vnd.ogc.se_blank``
-     - A blank image is returned. 
-   * - JSON
-     - ``application/json``
-     - The error is reported as a simple JSON representation.
   
 .. _wms_getcap:
 
 GetCapabilities
----------------
+------------------------
 
 Request
 ^^^^^^^
@@ -151,7 +156,7 @@ In the example bellow the available style is *default*.
 
 
 GetMap
-------
+-------------
 
 Request
 ^^^^^^^
@@ -377,7 +382,7 @@ Layers without a temporal component will be served normally, allowing clients to
      - ``1993-05-05T11:34:00.0Z``
 
 Specifying an absolute interval
-"""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""
 
 A client may request information over a continuous interval instead of a single instant by specifying a start and end time, separated by a ``/`` character.
 
@@ -395,7 +400,7 @@ In this scenario the start and end are *inclusive*; that is, samples from exactl
      - ``2010-12-25T00:00:00.0Z/2010-12-25T23:59:59.999Z``
 
 Specifying a relative interval
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""
 
 A client may request information over a relative time interval instead of a set time range by specifying a start or end time with an associated duration, separated by a ``/`` character.
 
@@ -416,7 +421,7 @@ One end of the interval must be a time value, but the other may be a duration va
      - ``PT36H/PRESENT``
 
 Reduced accuracy times
-""""""""""""""""""""""
+""""""""""""""""""""""""""""""
 
 The WMS specification also allows time specifications to be truncated by omitting some of the time string. Usually servers will treat the time as a range whose length is equal to the *most precise unit specified* in the time string. 
 For example, if the time specification omits all fields except year, it identifies a range one year long starting at the beginning of that year.
@@ -436,7 +441,7 @@ For example, if the time specification omits all fields except year, it identifi
      - ``2010-12-25T00:00:00.0Z/2010-12-25T23:59:59.999Z``
 
 Reduced accuracy times with ranges
-""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""
 
 Reduced accuracy times are also allowed when specifying ranges. The ranges are inclusive.
 Some servers (e.g GeoServer) effectively expands the start and end times as described above, and then includes any samples from after the beginning of the start interval and before the end of the end interval.
@@ -456,7 +461,7 @@ Some servers (e.g GeoServer) effectively expands the start and end times as desc
      - 2010-12-25T12:00:00.0Z/ 2010-12-25T18:59:59.999Z
 
 Specifying a list of times
-""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""
 
 Some Servers, such a GeoServer can also accept a list of discrete time values. This is useful for some applications such as animations, where one time is equal to one frame. 
 
@@ -479,7 +484,7 @@ If the list is evenly spaced (for example, daily or hourly samples) then the lis
      - TIME=1999-09-01T00:00:00.0Z/ 1999-11-01T00:00:00.0Z/ P1M
 
 Specifying a periodicity
-""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""
 
 The periodicity is also specified in ISO-8601 format: a capital P followed by one or more interval lengths, each consisting of a number and a letter identifying a time unit:
 
@@ -514,7 +519,7 @@ For example, the multiple representations listed below are all equivalent.
 * 18 months: P1Y6M0DT0H0M0S, P1Y6M0D, P0Y18M0DT0H0M0S or P18M
 
 GetFeatureInfo
---------------
+--------------------------
 
 Request
 ^^^^^^^
@@ -690,8 +695,34 @@ The result will be:
 .. _wms_describelayer:
 
 
+Exceptions
+---------------
+
+When a request from a client to a WMS Server is not performed properly, a Server needs to report an exception. 
+Formats in which a WMS Server can report exceptions are shown in the table bellow.
+
+.. list-table:: Exceptions
+   :widths: 15 50 35
+   :header-rows: 1
+   
+   * - **Format**
+     - **Syntax**
+     - **Notes**
+   * - XML
+     - ``application/vnd.ogc.se_xml``
+     - The error is described in XML.
+   * - PNG
+     - ``application/vnd.ogc.se_inimage``
+     - The error is return as an image.
+   * - Blank
+     - ``application/vnd.ogc.se_blank``
+     - A blank image is returned. 
+   * - JSON
+     - ``application/json``
+     - The error is reported as a simple JSON representation.
+
 References
-----------
+-----------------
 
 - `GeoServer WMS reference <http://docs.geoserver.org/stable/en/user/services/wms/reference.html>`_
   - `Creative Commons 3.0 <http://creativecommons.org/licenses/by/3.0/>`_
