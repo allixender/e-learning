@@ -1,5 +1,5 @@
-Web Map Tile Service (WMTS)
-===========================
+SensorThings API
+================
 
 
 .. toctree::
@@ -8,4 +8,3 @@ Web Map Tile Service (WMTS)
    overview.rst
    main.rst
    operations.rst
-   api.rst
