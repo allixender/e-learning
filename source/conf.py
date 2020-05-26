@@ -34,7 +34,11 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.imgmath',
+<<<<<<< HEAD
     # 'sphinx.ext.mathjax',
+=======
+  #  'sphinx.ext.mathjax',
+>>>>>>> 807897c5f16911943d5bcc19802ab88c19cc1460
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
 ]
@@ -153,7 +157,7 @@ html_theme_path = ["_themes", ]
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['static']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -290,8 +294,7 @@ texinfo_documents = [
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'http://docs.python.org/': None}
 
-def setup(app):
-  app.add_description_unit('confval', 'confval', 
-    'pair: %s; configuration value') 
-
-
+# The function below was deactivated because it was causing an error at compilation 2019-11-28
+# def setup(app):
+#   app.add_description_unit('confval', 'confval',
+#     'pair: %s; configuration value')
